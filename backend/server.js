@@ -2,8 +2,9 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import connectDB from './config/db.js';
-import authRoutes from './routes/userRoutes.js';
-import userRoutes from './routes/authRoutes.js';
+import userRoutes from './routes/userRoutes.js'; // for future /me and user info
+import authRoutes from './routes/authRoutes.js'; // login/register
+import weeklyFocusRoutes from './routes/weeklyFocusRoutes.js';
 
 dotenv.config();
 connectDB();
@@ -14,7 +15,8 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/api/auth', authRoutes);
-app.get('api/user', userRoutes);
+app.use('/api/user', userRoutes);
+app.use('/api/focus', weeklyFocusRoutes);
 
 app.get('/', (req, res) => {
   res.send('API is running...');
