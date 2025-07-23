@@ -7,3 +7,7 @@ const generateToken = (userId) => {
 };
 
 export default generateToken;
+
+export const checkOwnership = (resourceUserId, loggedInUserId) => {
+  return resourceUserId.toString() === loggedInUserId.toString();
+};

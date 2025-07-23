@@ -16,7 +16,7 @@ app.use(cors());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
-app.use('/api/focus', weeklyFocusRoutes);
+app.use('/api/weeklyFocus', weeklyFocusRoutes);
 
 app.get('/', (req, res) => {
   res.send('API is running...');
