@@ -22,14 +22,13 @@ const weeklyFocusSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ['Pending', 'In Progress', 'Completed'],
-      default: 'Pending',
+      enum: ['pending', 'in-progress', 'completed'],
+      default: 'pending',
     },
     priority: {
-      type: Number, // e.g., 1 (high) to 5 (low)
-      default: 3,
-      min: 1,
-      max: 5,
+      type: String,
+      enum: ['low', 'medium', 'high'],
+      default: 'medium',
     },
   },
   {

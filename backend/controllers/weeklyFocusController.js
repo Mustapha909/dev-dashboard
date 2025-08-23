@@ -1,9 +1,6 @@
 import WeeklyFocus from '../models/WeeklyFocus.js';
 import { handleServerError } from '../utils/errorHandler.js';
 import { checkOwnershipOrFail } from '../utils/checkOwnership.js';
-import { parse } from 'dotenv';
-
-// continue with logic
 
 export const createWeeklyFocus = async (req, res) => {
   try {
@@ -38,27 +35,26 @@ export const createWeeklyFocus = async (req, res) => {
 export const getWeeklyFocus = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 10;
-    const skip = (page - 1) * limit;
+    const limit = parseInt(req.query.limit) || 5;
+    const status = req.query.status;
+    const priority = req.query.priority;
+    const startDate = req.query.startDate;
+    const endDate = req.query.endDate;
+    const search = req.query.search;
 
-    // Base filter for current user
     const filter = { user: req.user._id };
 
-    // Add filters based on query parameters
-    if (req.query.status) {
-      filter.status = req.query.status; // Example: status=Completed
-    }
-
-    if (req.query.priority) {
-      filter.priority = parseInt(req.query.priority); // priority=1
-    }
-
-    if (req.query.startDate && req.query.endDate) {
+    if (search) filter.title = { $regex: search, $options: 'i' };
+    if (status) filter.status = status;
+    if (priority) filter.priority = priority;
+    if (startDate && endDate) {
       filter.weekStartDate = {
-        $gte: new Date(req.query.startDate),
-        $lte: new Date(req.query.endDate),
+        $gte: new Date(startDate),
+        $lte: new Date(endDate),
       };
     }
+
+    const skip = (page - 1) * limit;
 
     const total = await WeeklyFocus.countDocuments(filter);
 
