@@ -36,12 +36,7 @@ export const getWeeklyFocus = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 5;
-    const status = req.query.status;
-    const priority = req.query.priority;
-    const startDate = req.query.startDate;
-    const endDate = req.query.endDate;
-    const search = req.query.search;
-
+    const { startDate, endDate, search, status, priority } = req.query;
     const filter = { user: req.user._id };
 
     if (search) filter.title = { $regex: search, $options: 'i' };

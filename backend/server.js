@@ -2,9 +2,10 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import connectDB from './config/db.js';
-import userRoutes from './routes/userRoutes.js'; // for future /me and user info
-import authRoutes from './routes/authRoutes.js'; // login/register
+import userRoutes from './routes/userRoutes.js';
+import authRoutes from './routes/authRoutes.js';
 import weeklyFocusRoutes from './routes/weeklyFocusRoutes.js';
+import learningLogRoutes from './routes/learningLogRoutes.js';
 
 dotenv.config();
 connectDB();
@@ -17,6 +18,7 @@ app.use(cors());
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/weeklyFocus', weeklyFocusRoutes);
+app.use('/api/learningLogs', learningLogRoutes);
 
 app.get('/', (req, res) => {
   res.send('API is running...');
