@@ -4,8 +4,8 @@ import cors from 'cors';
 import connectDB from './config/db.js';
 import userRoutes from './routes/userRoutes.js';
 import authRoutes from './routes/authRoutes.js';
-import weeklyFocusRoutes from './routes/weeklyFocusRoutes.js';
 import learningLogRoutes from './routes/learningLogRoutes.js';
+import WeeklyReportRoutes from './routes/weeklyReportRoutes.js';
 
 dotenv.config();
 connectDB();
@@ -17,8 +17,8 @@ app.use(cors());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
-app.use('/api/weeklyFocus', weeklyFocusRoutes);
 app.use('/api/learningLogs', learningLogRoutes);
+app.use('/api/reports', WeeklyReportRoutes);
 
 app.get('/', (req, res) => {
   res.send('API is running...');
@@ -36,3 +36,4 @@ app.listen(PORT, () => {
 
 // http://localhost:5001/api/weeklyFocus/
 // http://localhost:5001/api/auth/login
+// http://localhost:5001/api/reports/generate?weekStart=2005-08-13
