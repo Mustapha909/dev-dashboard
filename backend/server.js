@@ -6,6 +6,7 @@ import userRoutes from './routes/userRoutes.js';
 import authRoutes from './routes/authRoutes.js';
 import learningLogRoutes from './routes/learningLogRoutes.js';
 import WeeklyReportRoutes from './routes/weeklyReportRoutes.js';
+import getDailyQuote from './routes/dailyQuoteRoutes.js ';
 
 dotenv.config();
 connectDB();
@@ -19,6 +20,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/learningLogs', learningLogRoutes);
 app.use('/api/reports', WeeklyReportRoutes);
+app.use('/api/quotes', getDailyQuote);
 
 app.get('/', (req, res) => {
   res.send('API is running...');
